@@ -47,7 +47,7 @@ if [ -n "${PODMAN_NETWORK_BACKEND}" ]; then
     PODMAN_NETWORK_ARG="--network ${PODMAN_NETWORK_BACKEND}"
 fi
 
-podman run --rm ${PODMAN_NETWORK_ARG} -v /lib/modules:/lib/modules -v /dev:/dev --privileged -v $(pwd):$(pwd):z alpine ash -c "cd $(pwd) &&
+podman run --rm ${PODMAN_NETWORK_ARG} -v /lib/modules:/lib/modules -v /dev:/dev --privileged -v "$(pwd)":"$(pwd)":z -w "$(pwd)" alpine ash -c "
 ./alpine-make-vm-image \
     --image-format qcow2 \
     --image-size $IMAGE_SIZE \
